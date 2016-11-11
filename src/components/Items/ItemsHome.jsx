@@ -4,7 +4,6 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import 'whatwg-fetch'
 import { withRouter } from 'react-router';
 
-
 class ItemsHome extends Component {
   constructor(props) {
     super(props);
@@ -48,22 +47,20 @@ class GenericJsonTable extends Component {
 
       this.props.data.forEach(function(item, index) {
         rows.push(<GenericJsonTableRow data = {item}/>);
-        console.log(rows.length);
       });
 
-      return ( <div> {rows} </div>);
+      return ( <div className='GenericJsonTable'> {rows} </div>);
   }
 
 }
 class GenericJsonTableHeaderRow extends Component {
   render () {
     var cells = [];
-    var keys = Object.keys(this.props.data);
-    keys.forEach(function(key,index,cells)  {
-       cells.push(<GenericJsonTableHeaderCell value={key}/>);
-    });
+    for (var property in this.props.data) {
+       cells.push(<GenericJsonTableHeaderCell value={property}/>);
+    };
     return (
-      <div>{cells}</div>
+      <div className = 'GenericJsonTableHeaderRow'>{cells}</div>
     )
   }
 }
@@ -73,24 +70,24 @@ class GenericJsonTableRow extends Component {
     var cells = [];
     for (var property in this.props.data) {
       if (this.props.data.hasOwnProperty(property)) {
-        cells.push(<GenericJsonTableCell value={property}/>);
+        cells.push(<GenericJsonTableCell value={this.props.data[property]}/>);
       }
     } 
     return (
-      <div>{cells}</div>
+      <div className = 'GenericJsonTableRow'>{cells}</div>
     )
   }
 }
 
 class GenericJsonTableCell extends Component {
   render() {
-    return (<div>{this.props.value}</div>);
+    return (<div className = 'GenericJsonTableCell'>{this.props.value}</div>);
   }
 }
 
 class GenericJsonTableHeaderCell extends Component {
   render() {
-    return (<div><h1>{this.props.value}</h1></div>);
+    return (<div className = 'GenericJsonTableHeaderCell'><h4>{this.props.value}</h4></div>);
   }
 }
 
@@ -108,13 +105,12 @@ function initSheetList(sheetsJson) {
   var sheetMap = {};
   for (var i = 0; i < arrayLength; i++) {
     var title = entries[i].title.$t;
-    console.log(title);
     var id = entries[i].id.$t;
-      var lastSlash = id.lastIndexOf('/');
-      id = id.substring(lastSlash+1,id.length);
-      sheetMap[title] = id;
-    }
-    return sheetMap;
+    var lastSlash = id.lastIndexOf('/');
+    id = id.substring(lastSlash+1,id.length);
+    sheetMap[title] = id;
+  }
+  return sheetMap;
 }
 
 function loadItemList(sheetId, callback) {
@@ -140,7 +136,6 @@ function initItemList(sheetsJson) {
     }
     parsedRows[i] = row;
   }
-  console.log(parsedRows.length);
   return parsedRows;
 }
 
