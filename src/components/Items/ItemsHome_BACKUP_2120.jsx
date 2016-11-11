@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import 'whatwg-fetch'
+<<<<<<< HEAD
 import { withRouter } from 'react-router';
-
+=======
+>>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
 
 class ItemsHome extends Component {
   constructor(props) {
     super(props);
     window.sourceSheet = '1HktYmh9zKprS5YrBWMakZKIfKNIa7bV9X7fp_bpaAfM';
+<<<<<<< HEAD
     this.updateData = this.updateData.bind(this);
     this.loadData = this.loadData.bind(this);
     loadSheetList(this.loadData);
@@ -40,7 +43,9 @@ class ItemsHome extends Component {
 }
 
 class GenericJsonTable extends Component {
-
+=======
+    loadSheetList();
+  }
 >>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
   render() {
       var rows = []
@@ -83,6 +88,7 @@ class GenericJsonTableRow extends Component {
   }
 }
 
+<<<<<<< HEAD
 class GenericJsonTableCell extends Component {
   render() {
     return (<div>{this.props.value}</div>);
@@ -102,6 +108,18 @@ function loadSheetList(callback) {
       return response.text();
     }).then(callback);
 }
+=======
+
+function loadSheetList() {
+  fetch('https://spreadsheets.google.com/feeds/worksheets/'+window.sourceSheet+'/public/basic?alt=json')
+  .then(function(response) {
+      return response.text();
+    }).then(function(sheetsJson) {
+      initSheetList(sheetsJson)
+    })
+}
+
+>>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
 function initSheetList(sheetsJson) {
   var sheets = JSON.parse(sheetsJson);
   var entries = sheets.feed.entry;
@@ -115,6 +133,7 @@ function initSheetList(sheetsJson) {
       id = id.substring(lastSlash+1,id.length);
       sheetMap[title] = id;
     }
+<<<<<<< HEAD
     return sheetMap;
 }
 
@@ -123,9 +142,28 @@ function loadItemList(sheetId, callback) {
     .then(function(response) {
       return response.text();
     }).then(callback)
+
+}
+
+=======
+    window.sheetMap = sheetMap;
+
+    loadItemList();
 }
 
 
+
+function loadItemList() {
+    var swordsId = window.sheetMap.Swords;
+    fetch('https://spreadsheets.google.com/feeds/list/'+window.sourceSheet+'/'+swordsId+'/public/basic?alt=json')
+    .then(function(response) {
+      return response.text();
+    }).then(function(sheetsJson) {
+      initItemList(sheetsJson)
+    })
+
+}
+>>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
 function initItemList(sheetsJson) {
   var sheet = JSON.parse(sheetsJson);
   var rows = sheet.feed.entry;
@@ -141,8 +179,12 @@ function initItemList(sheetsJson) {
     }
     parsedRows[i] = row;
   }
+<<<<<<< HEAD
   console.log(parsedRows.length);
   return parsedRows;
+=======
+  console.log(JSON.stringify(rows));
+>>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
 }
 
 

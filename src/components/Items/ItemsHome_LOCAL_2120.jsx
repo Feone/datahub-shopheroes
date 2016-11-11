@@ -4,7 +4,6 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import 'whatwg-fetch'
 import { withRouter } from 'react-router';
 
-
 class ItemsHome extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +39,6 @@ class ItemsHome extends Component {
 }
 
 class GenericJsonTable extends Component {
-
->>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
   render() {
       var rows = []
       var header = <GenericJsonTableHeaderRow data={this.props.data[0]}/>
@@ -123,8 +120,8 @@ function loadItemList(sheetId, callback) {
     .then(function(response) {
       return response.text();
     }).then(callback)
-}
 
+}
 
 function initItemList(sheetsJson) {
   var sheet = JSON.parse(sheetsJson);
