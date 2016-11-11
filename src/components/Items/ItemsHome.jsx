@@ -41,7 +41,6 @@ class ItemsHome extends Component {
 
 class GenericJsonTable extends Component {
 
->>>>>>> 70d7b6441742a3e365dc187c2c4bbd3ec695a358
   render() {
       var rows = []
       var header = <GenericJsonTableHeaderRow data={this.props.data[0]}/>
