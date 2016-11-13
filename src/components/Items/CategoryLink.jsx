@@ -6,6 +6,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export default ({category}) => {
+    console.log(category);
   const className = 'col-xs-2';
   const to = `/items/${category.toLowerCase()}`;
   const img = require(`../../assets/ItemIcons/${category}.png`);

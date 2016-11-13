@@ -15,12 +15,12 @@ export default ({ params: {category}, loadData }) => {
   //   })
   //   .catch(err => console.error(err));
   const links = [];
-  const img = require(`../../assets/ItemIcons/Armor.png`);
-  const style = {
-    backgroundImage: `url(${img})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center 20px'
-  }
+  // const img = require(`../../assets/ItemIcons/Armor.png`);
+  // const style = {
+  //   backgroundImage: `url(${img})`,
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundPosition: 'center 20px'
+  // }
 
   createLinks(category, loadData(category));
   function createLinks(itemType, itemArray) {
